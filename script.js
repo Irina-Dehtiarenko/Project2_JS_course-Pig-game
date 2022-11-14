@@ -55,7 +55,27 @@ const addScore = () => {
   document.getElementById(`score--${activePlayer}`).textContent =
     scores[activePlayer];
 
-  switchPlayer();
+  //   switchPlayer();
+
+  if (scores[activePlayer] >= 10) {
+    currentScore = 0;
+
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentScore;
+
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.remove('player--active');
+
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.add('player--winner');
+
+    btnHold.removeEventListener('click', addScore);
+    btnRoll.removeEventListener('click', randomDice);
+  } else {
+    switchPlayer();
+  }
 };
 
 btnRoll.addEventListener('click', randomDice);
